@@ -6,3 +6,4 @@ for i in list1:
         x.append((i+j))
 
 print(x)
+
