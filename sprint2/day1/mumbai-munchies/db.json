@@ -1,0 +1,23 @@
+{
+    "Inventory": [
+        {
+            "ID": 1,
+            "Name": "idli",
+            "Price": 50,
+            "Availability": "yes"
+        },
+        {
+            "ID": 2,
+            "Name": "samosa",
+            "Price": 60,
+            "Availability": "no"
+        },
+        {
+            "ID": 3,
+            "Name": "Pizza",
+            "Price": 100,
+            "Availability": "yes"
+        }
+    ],
+    "sales": []
+}

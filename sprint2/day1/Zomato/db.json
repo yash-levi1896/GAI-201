@@ -1,0 +1,59 @@
+{
+    "Inventory": [
+        {
+            "ID": 2,
+            "Name": "Dosa",
+            "Price": 100,
+            "Availability": "yes"
+        },
+        {
+            "ID": 3,
+            "Name": "Dhokla",
+            "Price": 40,
+            "Availability": "yes"
+        },
+        {
+            "ID": 4,
+            "Name": "Idli",
+            "Price": 40,
+            "Availability": "no"
+        }
+    ],
+    "orders": [
+        {
+            "OrderID": 1,
+            "CustomerName": "yash",
+            "DishID": [
+                1,
+                2
+            ],
+            "Status": "on the way"
+        },
+        {
+            "OrderID": 2,
+            "CustomerName": "nitin",
+            "DishID": [
+                1,
+                2
+            ],
+            "Status": "received"
+        },
+        {
+            "OrderID": 3,
+            "CustomerName": "abha",
+            "DishID": [
+                2
+            ],
+            "Status": "received"
+        },
+        {
+            "OrderID": 4,
+            "CustomerName": "xyz",
+            "DishID": [
+                2,
+                3
+            ],
+            "Status": "On the way"
+        }
+    ]
+}
