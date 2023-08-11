@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f7f7f7;
+    }
+
+    nav {
+        background-color: #333;
+        color: white;
+        padding: 10px 0;
+    }
+
+    nav ul {
+        list-style-type: none;
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav li {
+        margin: 0 20px;
+    }
+
+    nav a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+    }
+
+    .form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* margin-left: 300px; */
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        background-color: white;
+        max-width: 400px;
+        margin: 0 auto;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+
+    input {
+        width: 70%; /* Reduced input width */
+        padding: 10px;
+        display: flex;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        justify-content: center;
+    }
+    input[name="key"] {
+        /* margin-top: 20px; */
+        padding-top: 10px;
+    }
+    #my-form{
+        width:40%;
+        padding-left: 40px;
+        padding: 20px;
+        margin: auto;
+        margin-top: 30px;
+        
+    }
+
+    button[type="submit"] {
+        background-color: #333;
+        color: white;
+        margin-top: 10px;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #555;
+    }
+</style>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'create' %}">Create</a></li>
+            <li><a href="{% url 'read' %}">Read</a></li>
+            <li><a href="{% url 'update' %}">Update</a></li>
+            <li><a href="{% url 'delete' %}">Delete</a></li>
+        </ul>
+    </nav>
+    <form id="my-form" action="{% url 'create' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="key" placeholder="Key" id="k"> <br>
+        <input type="text" name="value" placeholder="Value" id="v"> <br>
+        <button type="submit">Add Key-Value Pair</button>
+    </form>
+</body>
+<script>
+    document.getElementById('my-form').addEventListener('submit', function(event) {
+        event.preventDefault();  // Prevent the form from submitting normally
+    
+        var form = event.target;
+        var formData = new FormData(form);
+        if(document.getElementById('k').value && document.getElementById('v').value){
+            fetch(form.action, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);  // Display response message in an alert
+            document.getElementById('k').innerText=""
+            document.getElementById('v').innerText=""
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }else{
+        alert("fill the empty field")
+    }
+    });
+    
+
+
+        
+    </script>
+</html>
+
+
+
+

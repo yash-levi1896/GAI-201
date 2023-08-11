@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            
+            height: 50vh;
+        }
+        
+        nav {
+        background-color: #333;
+        color: white;
+        padding: 10px 0;
+        width: 100%;
+    }
+
+    nav ul {
+        list-style-type: none;
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav li {
+        margin: 0 20px;
+    }
+
+    nav a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+    }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+            margin-left: 800px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    
+        button[type="submit"] {
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 10px 15px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+    
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a href="{% url 'create' %}">Create</a></li>
+        <li><a href="{% url 'read' %}">Read</a></li>
+        <li><a href="{% url 'update' %}">Update</a></li>
+        <li><a href="{% url 'delete' %}">Delete</a></li>
+    </ul>
+</nav>
+    <div class="form-container">
+        <form id="my-form" action="{% url 'delete' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="key" placeholder="Key to Delete" id="k">
+            <button type="submit">Delete Key</button>
+        </form>
+        <div id="alert-message" style="display: none;"></div>
+    </div>
+
+    <script>
+        document.getElementById('my-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var form = event.target;
+            var formData = new FormData(form);
+            if(document.getElementById('k').value){
+                fetch(form.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message)
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+            }else{
+                alert("field of key should not be empty")
+            }
+            
+        });
+    </script>
+</body>
+</html>
