@@ -15,7 +15,7 @@ weather_data = {
 def weather_view(request, city):
     try:
         weather_info = weather_data[city]
-        return JsonResponse(weather_info,status_code=200)
+        return JsonResponse(weather_info)
     except KeyError:
         raise Http404("City not found")
     
